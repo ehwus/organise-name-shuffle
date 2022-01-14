@@ -34,8 +34,19 @@
             "Alex"
         ]
 
+        const getDayOfWeek = () => {
+            const d = new Date();
+            return d.getDay();
+        }
+
         const displayShuffledNames = () => {
-            const shuffledNames = NAMES.sort(() => (Math.random() > .5) ? 1 : -1);
+            const shuffledNames = [...NAMES].sort(() => (Math.random() > .5) ? 1 : -1);
+
+            if (getDayOfWeek() === 5) {
+                const chloeIndex = shuffledNames.indexOf("Chloe");
+                shuffledNames.splice(chloeIndex, 1);
+            }
+
             const namesContainer = document.querySelector('.names-container');
             namesContainer.innerText = shuffledNames.join(', ')
         }
